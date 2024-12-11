@@ -32,7 +32,6 @@ export default function Orders() {
           key: "user",
           label: "Ordered by",
           render: (row) => {
-            console.log(row);
             return (
               row.user?.firstName +
               " " +

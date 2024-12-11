@@ -20,7 +20,6 @@ export default function BusinessInformation() {
     <Page title="Business Information">
       <form
         onSubmit={(e) => {
-          console.log("ON submit");
           e.preventDefault();
           controller.handleSubmit();
         }}

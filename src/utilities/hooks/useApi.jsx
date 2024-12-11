@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState, useCallback } from "react";
+import API_URL from "../constants/urls";
 
 export default function useApi({
   method = "GET",
@@ -16,12 +17,11 @@ export default function useApi({
     setError(null);
 
     try {
-      console.log("REQUESTING");
       const response = await axios.request({
         method,
         params,
         ...config,
-        url: "http://localhost:3000" + (config?.url || url),
+        url: API_URL + (config?.url || url),
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
@@ -30,7 +30,6 @@ export default function useApi({
       setLoading(false);
       return { ok: true, data: response.data };
     } catch (err) {
-      console.log("REQUEST SENT: ", err);
       setError(err.response?.data || err.message);
       setLoading(false);
       return { ok: false, error: err.response?.data || err.message };

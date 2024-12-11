@@ -19,7 +19,6 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem("token", response.data.token);
       await fetchUser();
       navigate("/");
-      console.log("Navigating to /");
     }
     setLoading(false);
     return response;

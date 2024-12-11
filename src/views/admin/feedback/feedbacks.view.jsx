@@ -14,7 +14,6 @@ export default function Feedback() {
           key: "writtenBy",
           label: "Written by",
           render: (row) => {
-            console.log(row);
             return (
               row?.order?.user?.firstName +
               " " +

@@ -11,7 +11,6 @@ export default function AdminLayout() {
   }
 
   if (!auth.user) {
-    console.log("QUET: ", auth);
     return <Navigate to="/auth/login" />;
   }
 

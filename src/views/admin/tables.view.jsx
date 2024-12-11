@@ -62,14 +62,11 @@ export default function Tables() {
 
   useEffect(() => {
     if (api.data?.length) {
-      console.log(api.data);
       const newTables = api.data.map((t) => {
         return { ...t, i: "" + t.id };
       });
       setTables(newTables);
       setInitialTables(newTables);
-
-      console.log(newTables);
     }
   }, [api.data, setTables, setInitialTables]);
 
@@ -157,7 +154,6 @@ export default function Tables() {
           }}
         >
           {tables.map((table) => {
-            console.log("Table: ", table);
             const fullTable = initialTables.find((t) => t.i === table.i);
             return (
               <Box

@@ -31,6 +31,7 @@ import DataTable from "../../../components/admin/datatable.component";
 import { useEffect, useRef, useState } from "react";
 import { PlusIcon } from "lucide-react";
 import axios from "axios";
+import API_URL from "../../../utilities/constants/urls";
 
 export default function Product() {
   const params = useParams();
@@ -276,8 +277,6 @@ function Variants({ product, productId }) {
                     colorScheme="red"
                     size="xs"
                     onClick={() => {
-                      console.log("DELETE ROW: ", row);
-
                       if (row.group) {
                         handleRemoveVariantGroup(row);
                       } else {
@@ -335,7 +334,6 @@ function VariantGroupDialog({ productId, mode, initial, refresh }) {
 
   async function handleSubmit() {
     if (mode === "create") {
-      console.log("CREATE!");
       const response = await api.call({
         method: "post",
         data: { ...item, ...updated },
@@ -548,21 +546,17 @@ function ProductImage({ image, handleChange }) {
       formData.append("image", selectedFile);
 
       try {
-        const response = await axios.post(
-          "http://localhost:3000/upload",
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            onUploadProgress: (progressEvent) => {
-              const percentCompleted = Math.round(
-                (progressEvent.loaded * 100) / progressEvent.total
-              );
-              setUploadProgress(percentCompleted);
-            },
-          }
-        );
+        const response = await axios.post(API_URL + "/upload", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          onUploadProgress: (progressEvent) => {
+            const percentCompleted = Math.round(
+              (progressEvent.loaded * 100) / progressEvent.total
+            );
+            setUploadProgress(percentCompleted);
+          },
+        });
         setUploadProgress(0);
 
         const { imageUrl } = response.data;
