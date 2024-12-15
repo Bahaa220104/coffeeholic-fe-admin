@@ -12,7 +12,10 @@ export default function Categories() {
         {
           key: "name",
           label: "Name",
-          sx: { width: "100%" },
+        },
+        {
+          key: "type",
+          label: "Type",
         },
       ]}
       initial={[]}

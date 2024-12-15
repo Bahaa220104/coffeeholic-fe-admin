@@ -11,8 +11,15 @@ import useItem from "../../utilities/hooks/useItem";
 export default function BusinessInformation() {
   const controller = useItem({
     url: "/business",
-    empty: { email: "", phone: "" },
-    name: "FAQs",
+    empty: {
+      email: "",
+      phone: "",
+      address: "",
+      openingHours: "",
+      lat: 0,
+      lng: 0,
+    },
+    name: "Business Information",
     forceId: 1,
   });
 
@@ -42,6 +49,35 @@ export default function BusinessInformation() {
             }}
           />
         </InputGroup>
+        <InputGroup mt={3}>
+          <InputLeftAddon>Address</InputLeftAddon>
+          <Input
+            value={controller.get("address")}
+            onChange={(e) => {
+              controller.handleChange("address", e.target.value);
+            }}
+          />
+        </InputGroup>
+        <InputGroup mt={3}>
+          <InputLeftAddon>Opening Hours</InputLeftAddon>
+          <Input
+            value={controller.get("openingHours")}
+            onChange={(e) => {
+              controller.handleChange("openingHours", e.target.value);
+            }}
+          />
+        </InputGroup>
+
+        <InputGroup mt={3}>
+          <InputLeftAddon>Google Maps Embedded Html</InputLeftAddon>
+          <Input
+            value={controller.get("googleMapsUrl")}
+            onChange={(e) => {
+              controller.handleChange("googleMapsUrl", e.target.value);
+            }}
+          />
+        </InputGroup>
+
         <HStack w="100%" spacing={3} mt={3} justifyContent={"end"}>
           {controller.mode === "edit" && (
             <Button

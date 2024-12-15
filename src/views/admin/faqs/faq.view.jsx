@@ -4,6 +4,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
+  Text,
   VStack,
 } from "@chakra-ui/react";
 import Page from "../../../components/admin/page.component";
@@ -50,6 +51,33 @@ export default function FAQ() {
               }}
             />
           </InputGroup>
+
+          {controller.get("approvedAt") ? (
+            <Button
+              colorScheme="yellow"
+              onClick={() => {
+                controller.handleChange("approvedAt", null);
+              }}
+            >
+              Make Invisible to Public
+            </Button>
+          ) : (
+            <Button
+              onClick={() => {
+                controller.handleChange("approvedAt", new Date());
+              }}
+            >
+              Make Visible to Public
+            </Button>
+          )}
+          {controller.get("askedBy") && (
+            <Text>
+              Asked By: {controller.get("askedBy").firstName}{" "}
+              {controller.get("askedBy").lastName}, phone:{" "}
+              {controller.get("askedBy").phone}, email:{" "}
+              {controller.get("askedBy").email}{" "}
+            </Text>
+          )}
           <HStack w="100%" spacing={3} justifyContent={"end"}>
             {controller.mode === "edit" && (
               <Button

@@ -10,11 +10,12 @@ import {
 import DataTable from "../../../components/admin/datatable.component";
 import Page from "../../../components/admin/page.component";
 import useItem from "../../../utilities/hooks/useItem";
+import BasicSingleSelect from "../../../components/admin/basic-single-select.component";
 
 export default function Category() {
   const controller = useItem({
     url: "/categories",
-    empty: { name: "" },
+    empty: { name: "", type: "General" },
     name: "Categories",
   });
 
@@ -40,6 +41,17 @@ export default function Category() {
               onChange={(e) => {
                 controller.handleChange("name", e.target.value);
               }}
+            />
+          </InputGroup>
+          <InputGroup>
+            <InputLeftAddon>Type</InputLeftAddon>
+            <BasicSingleSelect
+              options={[
+                { label: "General", value: "General" },
+                { value: "Dietary Preferences", label: "Dietary Preferences" },
+              ]}
+              controller={controller}
+              field="type"
             />
           </InputGroup>
           <HStack w="100%" spacing={3} justifyContent={"end"}>

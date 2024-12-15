@@ -13,6 +13,7 @@ import {
   theme as baseTheme,
 } from "@chakra-ui/react";
 import { AuthProvider } from "./utilities/contexts/auth.context.jsx";
+import { LoadingProvider } from "./utilities/contexts/loading.context.jsx";
 
 const adminRoutes = [];
 navbarRoutesAdmin.forEach((route) => {
@@ -145,7 +146,9 @@ const theme = extendTheme({
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router} />
+      <LoadingProvider>
+        <RouterProvider router={router} />
+      </LoadingProvider>
     </ChakraProvider>
   </StrictMode>
 );

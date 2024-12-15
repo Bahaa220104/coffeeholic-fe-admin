@@ -17,13 +17,11 @@ export default function BasicSingleSelect({ options, controller, field }) {
         }),
       }}
       value={options.find((t) => {
-        return controller.get(field)?.find((e) => e == t.value);
+        return t.value == controller.get(field);
       })}
       onChange={(newValue) => {
-        controller.handleChange(
-          field,
-          newValue.map((v) => v.value)
-        );
+        console.log("NEW VALUE: ", newValue.value);
+        controller.handleChange(field, newValue.value);
       }}
       menuPortalTarget={document.body}
     />

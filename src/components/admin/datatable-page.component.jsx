@@ -1,9 +1,8 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import useData from "../../utilities/hooks/useData";
-import Page from "./page.component";
-import DataTable from "./datatable.component";
-import useApi from "../../utilities/hooks/useApi";
 import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useApi from "../../utilities/hooks/useApi";
+import DataTable from "./datatable.component";
+import Page from "./page.component";
 
 export default function DatatablePage({
   title,

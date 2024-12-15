@@ -1,6 +1,7 @@
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import API_URL from "../constants/urls";
+import { useLoading } from "../contexts/loading.context";
 
 export default function useApi({
   method = "GET",
@@ -11,9 +12,11 @@ export default function useApi({
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const loadingContext = useLoading();
 
   const call = async (config = {}) => {
     setLoading(true);
+    loadingContext.start();
     setError(null);
 
     try {
@@ -28,10 +31,12 @@ export default function useApi({
       });
       setData(response.data);
       setLoading(false);
+      loadingContext.stop();
       return { ok: true, data: response.data };
     } catch (err) {
       setError(err.response?.data || err.message);
       setLoading(false);
+      loadingContext.stop();
       return { ok: false, error: err.response?.data || err.message };
     }
   };
